@@ -1,9 +1,19 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Inter', sans-serif;
+    background-attachment: fixed;
 }
+
 button:hover {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 input:focus {
     transition: all 0.3s ease;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+}
+
+input::placeholder {
+    color: rgba(76, 29, 149, 0.5);
+    opacity: 1;
 }

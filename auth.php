@@ -10,7 +10,7 @@ function checkAuth() {
         
         $staticToken = 'static_token_1234567890';
         if ($token === $staticToken) {
-            $_SESSION['username'] = 'testuser';
+            $_SESSION['username'] = 'soknem';
             return true;
         }
     }
@@ -19,8 +19,8 @@ function checkAuth() {
 
 function login($username, $password, $remember) {
     
-    $staticUsername = 'testuser';
-    $staticPassword = 'password123';
+    $staticUsername = 'soknem';
+    $staticPassword = '123';
     $staticToken = 'static_token_1234567890';
     
     if ($username === $staticUsername && $password === $staticPassword) {
