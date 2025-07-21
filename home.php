@@ -31,7 +31,7 @@ if (isset($_POST['logout'])) {
             <h2 class="text-xl font-semibold mb-4">About This App</h2>
             <p class="text-gray-700">A simple, secure PHP login system with:</p>
             <ul class="list-disc pl-6 text-gray-700">
-                <li>Static username and password storage</li>
+                <li>SQLite storage in database.db</li>
                 <li>Remember Me via cookies</li>
                 <li>Modern Tailwind CSS design</li>
             </ul>
