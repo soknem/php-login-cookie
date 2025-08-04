@@ -14,7 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $result = register($username, $password);
         if ($result === true) {
-            $success = 'Registration successful! You can now <a href="index.php" class="text-purple-500 hover:underline">sign in</a>.';
+            $success = 'Registration successful!';
+            // No immediate redirect; handled by JavaScript
         } else {
             $error = $result;
         }
@@ -29,6 +30,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Register</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .toast {
+            min-width: 250px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            top: -100px; /* Start above the panel */
+            transform: translateX(-50%);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: top 0.5s ease-in-out;
+        }
+        .toast.show {
+            top: 20px; /* Show just above the panel */
+        }
+    </style>
 </head>
 <body class="bg-gradient-to-br from-purple-100 to-indigo-100 flex items-center justify-center min-h-screen">
     <div class="bg-white/10 backdrop-blur-lg p-8 rounded-xl shadow-2xl w-full max-w-md border border-white/20">
@@ -37,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p class="text-red-400 bg-red-100/50 p-3 rounded-lg text-center mb-6"><?php echo htmlspecialchars($error); ?></p>
         <?php endif; ?>
         <?php if ($success): ?>
-            <p class="text-green-400 bg-green-100/50 p-3 rounded-lg text-center mb-6"><?php echo $success; ?></p>
+            <p class="text-green-400 bg-green-100/50 p-3 rounded-lg text-center mb-6" id="successMessage" style="display:none;"><?php echo htmlspecialchars($success); ?></p>
         <?php endif; ?>
         <form method="POST" class="space-y-6">
             <div>
@@ -56,5 +77,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
         <p class="text-center text-purple-900 mt-6">Already have an account? <a href="index.php" class="text-purple-500 hover:underline">Sign in</a></p>
     </div>
+
+    <script>
+        <?php if ($success): ?>
+            // Show toast and redirect after a short delay
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = '<?php echo addslashes($success); ?>';
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.className += ' show';
+                setTimeout(() => {
+                    window.location.href = 'index.php'; // Redirect after toast is visible
+                }, 2000); // 2 seconds delay to show toast
+            }, 100);
+        <?php endif; ?>
+    </script>
 </body>
 </html>
