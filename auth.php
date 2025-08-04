@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-$host = '127.0.0.1'; 
-$dbname = 'login_db';
+$host = 'localhost'; 
+$dbname = 'test';
 $username = 'root';
-$password = 'rootpassword';
-$port = '3308'; 
+$password = '';
+$port = '3306'; 
 
 try {
     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $username, $password);
