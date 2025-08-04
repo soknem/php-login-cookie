@@ -26,28 +26,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-gradient-to-br from-purple-100 to-indigo-100 flex items-center justify-center min-h-screen">
-    <div class="bg-white/10 backdrop-blur-lg p-8 rounded-xl shadow-2xl w-full max-w-md border border-white/20">
-        <h2 class="text-3xl font-bold text-center mb-8 text-purple-900">Sign In</h2>
+<body class="bg-gradient-to-br from-gray-200 to-gray-600 flex items-center justify-center min-h-screen">
+    <div class="bg-white/10 backdrop-blur-xl p-8 rounded-xl shadow-2xl w-full max-w-md border border-gray-400">
+        <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">Sign In</h2>
         <?php if ($error): ?>
             <p class="text-red-400 bg-red-100/50 p-3 rounded-lg text-center mb-6"><?php echo htmlspecialchars($error); ?></p>
         <?php endif; ?>
         <form method="POST" class="space-y-6">
             <div>
-                <label class="block text-purple-900 font-medium mb-2">Username</label>
-                <input type="text" name="username" class="w-full p-3 bg-white/20 border border-purple-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300" placeholder="Enter username" required>
+                <label class="block text-gray-800 font-medium mb-2">Username</label>
+                <input type="text" name="username" class="w-full p-3 bg-white/20 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-700 transition-all duration-300" placeholder="Enter username" required>
             </div>
             <div>
-                <label class="block text-purple-900 font-medium mb-2">Password</label>
-                <input type="password" name="password" class="w-full p-3 bg-white/20 border border-purple-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300" placeholder="Enter password" required>
+                <label class="block text-gray-800 font-medium mb-2">Password</label>
+                <input type="password" name="password" class="w-full p-3 bg-white/20 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-700 transition-all duration-300" placeholder="Enter password" required>
             </div>
             <div class="flex items-center">
-                <input type="checkbox" name="remember" id="remember" class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-purple-200 rounded">
-                <label for="remember" class="ml-2 text-purple-900">Remember Me</label>
+                <input type="checkbox" name="remember" id="remember" class="h-4 w-4 text-gray-700 focus:ring-gray-700 border-gray-400 rounded">
+                <label for="remember" class="ml-2 text-gray-800">Remember Me</label>
             </div>
-            <button type="submit" class="w-full bg-purple-600 text-white p-3 rounded-lg hover:bg-purple-700 transition-all duration-300 transform hover:scale-105">Sign In</button>
+            <button type="submit" class="w-full bg-gray-700 text-white p-3 rounded-lg hover:bg-blue-800 transition-all duration-300 transform hover:scale-105">Sign In</button>
         </form>
-        <p class="text-center text-purple-900 mt-6">Don't have an account? <a href="register.php" class="text-purple-500 hover:underline">Sign up</a></p>
+        <p class="text-center text-gray-800 mt-6">Don't have an account? <a href="register.php" class="text-blue-800 hover:underline">Sign up</a></p>
     </div>
 </body>
 </html>

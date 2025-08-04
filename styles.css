@@ -5,15 +5,15 @@ body {
 
 button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adjusted for gray background */
 }
 
 input:focus {
     transition: all 0.3s ease;
-    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+    box-shadow: 0 0 0 3px rgba(55, 65, 81, 0.2); /* gray-700 with opacity */
 }
 
 input::placeholder {
-    color: rgba(76, 29, 149, 0.5);
+    color: rgba(107, 114, 128, 0.5); /* gray-500 based for placeholder */
     opacity: 1;
 }
