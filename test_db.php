@@ -1,10 +1,10 @@
 <?php
 // Database configuration
 $host = 'localhost'; // Use IP to force TCP connection
-$port = '3308'; // Port mapped in Docker Compose
-$dbname = 'login_db';
+$port = '3306'; // Port mapped in Docker Compose
+$dbname = 'test';
 $username = 'root';
-$password = 'rootpassword';
+$password = '';
 
 // Set content type for browser output
 if (PHP_SAPI !== 'cli') {
