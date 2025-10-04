@@ -4,6 +4,7 @@ $error = '';
 $success = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
+    $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
     
@@ -11,11 +12,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Passwords do not match';
     } elseif (strlen($password) < 6) {
         $error = 'Password must be at least 6 characters long';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = 'Invalid email format';
     } else {
-        $result = register($username, $password);
+        $result = register($username, $email, $password);
         if ($result === true) {
-            $success = 'Registration successful!';
-            // No immediate redirect; handled by JavaScript
+            $otp = generate_otp($username);
+            if ($otp && send_otp_email($email, $otp)) {
+                header("Location: otp.php?user=" . urlencode($username));
+                exit;
+            } else {
+                $error = 'Failed to send OTP. Please try again.';
+            }
         } else {
             $error = $result;
         }
@@ -57,13 +65,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if ($error): ?>
             <p class="text-red-400 bg-red-100/50 p-3 rounded-lg text-center mb-6"><?php echo htmlspecialchars($error); ?></p>
         <?php endif; ?>
-        <?php if ($success): ?>
-            <p class="text-green-400 bg-green-100/50 p-3 rounded-lg text-center mb-6" id="successMessage" style="display:none;"><?php echo htmlspecialchars($success); ?></p>
-        <?php endif; ?>
         <form method="POST" class="space-y-6">
             <div>
                 <label class="block text-gray-800 font-medium mb-2">Username</label>
                 <input type="text" name="username" class="w-full p-3 bg-white/20 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-700 transition-all duration-300" placeholder="Enter username" required>
+            </div>
+            <div>
+                <label class="block text-gray-800 font-medium mb-2">Email</label>
+                <input type="email" name="email" class="w-full p-3 bg-white/20 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-700 transition-all duration-300" placeholder="Enter email" required>
             </div>
             <div>
                 <label class="block text-gray-800 font-medium mb-2">Password</label>
@@ -77,21 +86,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
         <p class="text-center text-gray-800 mt-6">Already have an account? <a href="index.php" class="text-blue-800 hover:underline">Sign in</a></p>
     </div>
-
-    <script>
-        <?php if ($success): ?>
-            // Show toast and redirect after a short delay
-            const toast = document.createElement('div');
-            toast.className = 'toast';
-            toast.textContent = '<?php echo addslashes($success); ?>';
-            document.body.appendChild(toast);
-            setTimeout(() => {
-                toast.className += ' show';
-                setTimeout(() => {
-                    window.location.href = 'index.php'; // Redirect after toast is visible
-                }, 2000); // 2 seconds delay to show toast
-            }, 100);
-        <?php endif; ?>
-    </script>
 </body>
 </html>

@@ -76,7 +76,7 @@ try {
 
     // Recipients
     $mail->setFrom('sokname56@gmail.com', 'SU5 Website');
-    $mail->addAddress('povsoknem@gmail.com');
+    $mail->addAddress('povsoknem@gmails.com');
 
     // Content
     $mail->isHTML(true);

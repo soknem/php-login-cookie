@@ -8,10 +8,15 @@ $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
-    $remember = isset($_POST['remember']);
-    if (login($username, $password, $remember)) {
-        header('Location: home.php');
-        exit;
+    $user = check_credentials($username, $password);
+    if ($user) {
+        $otp = generate_otp($username);
+        if ($otp && send_otp_email($user['email'], $otp)) {
+            header("Location: otp.php?user=" . urlencode($username));
+            exit;
+        } else {
+            $error = 'Failed to send OTP. Please try again.';
+        }
     } else {
         $error = 'Invalid credentials';
     }
@@ -40,10 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div>
                 <label class="block text-gray-800 font-medium mb-2">Password</label>
                 <input type="password" name="password" class="w-full p-3 bg-white/20 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-700 transition-all duration-300" placeholder="Enter password" required>
-            </div>
-            <div class="flex items-center">
-                <input type="checkbox" name="remember" id="remember" class="h-4 w-4 text-gray-700 focus:ring-gray-700 border-gray-400 rounded">
-                <label for="remember" class="ml-2 text-gray-800">Remember Me</label>
             </div>
             <button type="submit" class="w-full bg-gray-700 text-white p-3 rounded-lg hover:bg-blue-800 transition-all duration-300 transform hover:scale-105">Sign In</button>
         </form>
