@@ -10,7 +10,7 @@ if (isset($_POST['logout'])) {
     exit;
 }
 
-// Fetch id, username, email, and password from the database
+
 global $pdo;
 $stmt = $pdo->query("SELECT id, username, email, password FROM users");
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
