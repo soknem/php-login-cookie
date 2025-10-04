@@ -1,19 +1,123 @@
-body {
-    font-family: 'Inter', sans-serif;
-    background-attachment: fixed;
+/* Reset default styles for consistency */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adjusted for gray background */
+/* Base body styles with dark yellow gradient */
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(to bottom right, #FFC107, #FFB300);
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+/* Form container for login, register, and OTP pages */
+.form-container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid #E0A800;
+    width: 100%;
+    max-width: 24rem; /* Matches max-w-md */
+}
+
+/* Button styles for high contrast */
+.btn-primary {
+    background-color: #000000;
+    color: #FFFFFF;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background-color: #333333;
+    transform: scale(1.05);
+}
+
+/* Input styles */
+input {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid #D1D5DB; /* Gray-300 for border */
+    border-radius: 8px;
+    padding: 0.75rem;
+    width: 100%;
+    transition: all 0.3s ease;
 }
 
 input:focus {
-    transition: all 0.3s ease;
-    box-shadow: 0 0 0 3px rgba(55, 65, 81, 0.2); /* gray-700 with opacity */
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
 }
 
 input::placeholder {
-    color: rgba(107, 114, 128, 0.5); /* gray-500 based for placeholder */
+    color: rgba(0, 0, 0, 0.5);
     opacity: 1;
 }
+
+/* Text styles for high contrast */
+.text-primary {
+    color: #000000;
+}
+
+/* Link styles */
+.link-primary {
+    color: #000000;
+    text-decoration: underline;
+}
+
+.link-primary:hover {
+    color: #333333;
+}
+
+/* Card styles for homepage dashboard */
+.card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Header and footer styles */
+header, footer {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #D1D5DB; /* Gray-300 */
+}
+
+/* Toast notification for register page */
+.toast {
+    min-width: 250px;
+    background-color: #000000;
+    color: #FFFFFF;
+    text-align: center;
+    border-radius: 6px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    top: -100px;
+    transform: translateX(-50%);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: top 0.5s ease-in-out;
+}
+
+.toast.show {
+    top: 20px;
+}
+
+/* Ensure Tailwind classes don't conflict */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
